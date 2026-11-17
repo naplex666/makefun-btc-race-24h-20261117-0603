@@ -1,15 +1,16 @@
 import { runBars, type Bar, type BarsState, type BuyInput, type SellInput } from './vendor/makefun-bars.ts';
 
 // A one-position continuation/mean-reversion system.  Entries require either a measured
-// three-minute impulse or a close 0.9 percent below its 60-minute mean. The exits are
-// deliberately wider than the replay's roughly 26 bp round-trip cost.
+// three-minute impulse or a close 0.8 percent below its 95-bar mean. The exits are
+// wider than the replay's roughly 26 bp round-trip cost; a four-hour time stop
+// gives slower rebounds room while retaining the original protective stop.
 const SYMBOL = 'CBBTC';
-const SMA_LEN = 60;
+const SMA_LEN = 95;
 const SURGE_BPS = 140;
-const DIP_BPS = 90;
-const TAKE_PROFIT_BPS = 120;
+const DIP_BPS = 80;
+const TAKE_PROFIT_BPS = 80;
 const STOP_BPS = 80;
-const MAX_HOLD_BARS = 120;
+const MAX_HOLD_BARS = 240;
 const SIZE_BPS = 9_000;
 const MAX_SLIPPAGE_BPS = 250;
 
